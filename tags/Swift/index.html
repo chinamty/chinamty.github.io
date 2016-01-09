@@ -217,7 +217,7 @@
                 <h1 class="postShorten-title" itemprop="headline">
                     
                         <a class="link-unstyled" href="/2016/01/04/My-New-Post/">
-                            基于Protocol的log
+                            基于Protocol的log实现
                         </a>
                     
                 </h1>
@@ -239,22 +239,30 @@
             
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <h5 id="u5199_u5728_u524D_u9762"><a href="#u5199_u5728_u524D_u9762" class="headerlink" title="写在前面"></a>写在前面</h5><p>苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。</p>
+                    <h4 id="u5199_u5728_u524D_u9762"><a href="#u5199_u5728_u524D_u9762" class="headerlink" title="写在前面"></a>写在前面</h4><p>苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。</p>
 <p><a href="https://developer.apple.com/videos/play/wwdc2015-408/" target="_blank" rel="external">Session 408: Protocol-Oriented Programming in Swift</a></p>
 <ul>
 <li>什么是协议（protocol）</li>
 </ul>
 <p>协议这个概念在Objective-C中就存在了。所谓协议其实就是一系列可以调用方法的结合。在我们调用的时候就可以将注意力集中在方法本身而不是类的实现。苹果在swift 2.0里面给protocol赋予了更加强大的功能。protocol能够被直接扩展。这样prototol的使用更加灵活方便了。</p>
-<h5 id="u6B63_u9898_u6765_u54AF"><a href="#u6B63_u9898_u6765_u54AF" class="headerlink" title="正题来咯"></a>正题来咯</h5><p>基于protocol可以被直接扩展的特性，我们可以很方便的实现一些经常被复用的代码。比如上传事件到一些数据分析平台上去。我这里用google analytics作为例子。</p>
-<p>######让我们先来看下之前是怎么做的。</p>
-<p>上传事件在程序中会被调用很多次，为了数据统计的准确性我们会在每个action里面都汇报到server上去。一般会有两种方法。 </p>
+<h4 id="u6B63_u9898_u6765_u54AF"><a href="#u6B63_u9898_u6765_u54AF" class="headerlink" title="正题来咯"></a>正题来咯</h4><p>基于protocol可以被直接扩展的特性，我们可以很方便的实现一些经常被复用的代码。比如上传事件到一些数据分析平台上去。我这里用google analytics作为例子。</p>
+<h5 id="u8BA9_u6211_u4EEC_u5148_u6765_u770B_u4E0B_u4E4B_u524D_u662F_u600E_u4E48_u505A_u7684_u3002"><a href="#u8BA9_u6211_u4EEC_u5148_u6765_u770B_u4E0B_u4E4B_u524D_u662F_u600E_u4E48_u505A_u7684_u3002" class="headerlink" title="让我们先来看下之前是怎么做的。"></a>让我们先来看下之前是怎么做的。</h5><p>上传事件在程序中会被调用很多次，为了数据统计的准确性我们会在每个action里面都汇报到server上去。一般会有两种方法。 </p>
 <ul>
 <li><p>直接调用sdk的方法</p>
-<p>  这种一般都是比较简单的sdk，像Yahoo的Flurry，他的方法只有一行<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- &#20889;&#19968;&#20010;&#31867;&#26041;&#27861;&#65292;&#28982;&#21518;&#35843;&#29992;&#10;&#10;&#9;&#26377;&#20123;&#32479;&#35745;&#30340;sdk&#30340;&#23454;&#29616;&#35201;&#31245;&#24494;&#22810;&#19968;&#20123;&#65292;&#27604;&#22914;google analytics&#12290;&#20182;&#30340;&#20195;&#30721;&#30475;&#36215;&#26469;&#26159;&#36825;&#26679;&#30340;&#10;&#9;&#10;&#9;    Google analytics code&#10;        var tracker = GAI.sharedInstance().defaultTracker&#10;        tracker.set(kGAIScreenName, value: name)&#10;        var builder = GAIDictionaryBuilder.createScreenView()&#10;        tracker.send(builder.build() as [NSObject : AnyObject])&#10;&#10;&#9;&#36825;&#20010;&#20195;&#30721;&#23601;&#26377;&#20123;&#22810;&#65292;&#25110;&#32773;&#25105;&#20204;&#24819;&#21516;&#26102;&#21521;&#20960;&#20010;&#20998;&#26512;&#24179;&#21488;&#21457;&#36865;&#20107;&#20214;&#30340;&#26102;&#20505;&#65292;&#19968;&#33324;&#37117;&#20250;&#20889;&#20010;&#31867;&#26041;&#27861;&#23553;&#35013;&#19968;&#19979;&#12290;&#28982;&#21518;&#29992;&#36825;&#26679;&#30340;&#26041;&#24335;&#22312;&#27599;&#20010;&#38656;&#35201;&#30340;&#22320;&#26041;&#35843;&#29992;&#12290;&#10;&#9;&#10;&#9;```Log.sendEvent(&#34;category&#34;, action: &#34;action&#34;, label: &#34;label&#34;, value: &#34;value&#34;)</span><br></pre></td></tr></table></figure></p>
+<p>  这种一般都是比较简单的sdk，像Yahoo的Flurry，他的方法只有一行<code>Flurry.LogEvent(&quot;message&quot;)</code>对于这类的请求没有必要单独写一个类方法去实现。    </p>
 </li>
+<li><p>写一个类方法，然后调用</p>
+<p>  有些统计的sdk的实现要稍微多一些，比如google analytics。他的代码看起来是这样的</p>
+<pre><code>Google analytics code
+var tracker = GAI.sharedInstance().defaultTracker
+tracker.set(kGAIScreenName, value: name)
+var builder = GAIDictionaryBuilder.createScreenView()
+tracker.send(builder.build() as [NSObject : AnyObject])
+</code></pre><p>  这个代码就有些多，或者我们想同时向几个分析平台发送事件的时候，一般都会写个类方法封装一下。然后用这样的方式在每个需要的地方调用。</p>
+<pre><code>Log.sendEvent(&quot;category&quot;, action: &quot;action&quot;, label: &quot;label&quot;, value: &quot;value&quot;)
+</code></pre></li>
 </ul>
-<p>######现在我们可以用更加优雅的方式实现</p>
-<p>Swift 2.0 以后我们可以用另外一种方式来实现上面第二种方法。</p>
+<h5 id="u73B0_u5728_u6211_u4EEC_u53EF_u4EE5_u7528_u66F4_u52A0_u4F18_u96C5_u7684_u65B9_u5F0F_u5B9E_u73B0"><a href="#u73B0_u5728_u6211_u4EEC_u53EF_u4EE5_u7528_u66F4_u52A0_u4F18_u96C5_u7684_u65B9_u5F0F_u5B9E_u73B0" class="headerlink" title="现在我们可以用更加优雅的方式实现"></a>现在我们可以用更加优雅的方式实现</h5><p>Swift 2.0 以后我们可以用另外一种方式来实现上面第二种方法。</p>
 <ul>
 <li><p>定义一个protocol</p>
 <pre><code>protocol MTLog {
@@ -296,8 +304,7 @@
 </code></pre><p>  这样我们就不用担心因为typo的问题导致最终的统计结果出现偏差了。</p>
 </li>
 </ul>
-<p>######更为强大来了</p>
-<p>有人会说这样的修改并没有给我们开发带来多大的便利。那么下面这个特性才是protocol的核心了。<br>我们的程序会有很多popup的信息，错误信息，版本提示信息等等等等。这时候我们不得不在每个需要用到的viewcontroller中都实现一遍。想不重复代码？ 可以！ 要么我们写一个UIViewController的基类。要么将viewController作为参数传进函数中。</p>
+<h5 id="u66F4_u4E3A_u5F3A_u5927_u6765_u4E86"><a href="#u66F4_u4E3A_u5F3A_u5927_u6765_u4E86" class="headerlink" title="更为强大来了"></a>更为强大来了</h5><p>有人会说这样的修改并没有给我们开发带来多大的便利。那么下面这个特性才是protocol的核心了。<br>我们的程序会有很多popup的信息，错误信息，版本提示信息等等等等。这时候我们不得不在每个需要用到的viewcontroller中都实现一遍。想不重复代码？ 可以！ 要么我们写一个UIViewController的基类。要么将viewController作为参数传进函数中。</p>
 <p>现在我们可以这么做：</p>
 <pre><code>extension MTLog where Self: UIViewController {
   func errorHandle(error: String) {
