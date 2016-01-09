@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[Hexo]]></title>
+  <title><![CDATA[Martin's Blog]]></title>
   
   <link href="/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2016-01-04T09:29:14.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://www.mcfuns.com/"/>
+  <updated>2016-01-09T15:00:05.000Z</updated>
+  <id>http://www.mcfuns.com/</id>
   
   <author>
     <name><![CDATA[Martin]]></name>
@@ -15,37 +15,96 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[My New Post]]></title>
-    <link href="http://yoursite.com/2016/01/04/My-New-Post/"/>
-    <id>http://yoursite.com/2016/01/04/My-New-Post/</id>
+    <title><![CDATA[基于Protocol的log]]></title>
+    <link href="http://www.mcfuns.com/2016/01/04/My-New-Post/"/>
+    <id>http://www.mcfuns.com/2016/01/04/My-New-Post/</id>
     <published>2016-01-04T09:29:14.000Z</published>
-    <updated>2016-01-04T09:29:14.000Z</updated>
-    <content type="html"></content>
-    <summary type="html">
-    
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <link href="http://yoursite.com/2016/01/04/hello-world/"/>
-    <id>http://yoursite.com/2016/01/04/hello-world/</id>
-    <published>2016-01-04T09:24:41.000Z</published>
-    <updated>2016-01-04T09:24:41.000Z</updated>
-    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+    <updated>2016-01-09T15:00:05.000Z</updated>
+    <content type="html"><![CDATA[<h5 id="u5199_u5728_u524D_u9762"><a href="#u5199_u5728_u524D_u9762" class="headerlink" title="写在前面"></a>写在前面</h5><p>苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。</p>
+<p><a href="https://developer.apple.com/videos/play/wwdc2015-408/" target="_blank" rel="external">Session 408: Protocol-Oriented Programming in Swift</a></p>
+<ul>
+<li>什么是协议（protocol）</li>
+</ul>
+<p>协议这个概念在Objective-C中就存在了。所谓协议其实就是一系列可以调用方法的结合。在我们调用的时候就可以将注意力集中在方法本身而不是类的实现。苹果在swift 2.0里面给protocol赋予了更加强大的功能。protocol能够被直接扩展。这样prototol的使用更加灵活方便了。</p>
+<h5 id="u6B63_u9898_u6765_u54AF"><a href="#u6B63_u9898_u6765_u54AF" class="headerlink" title="正题来咯"></a>正题来咯</h5><p>基于protocol可以被直接扩展的特性，我们可以很方便的实现一些经常被复用的代码。比如上传事件到一些数据分析平台上去。我这里用google analytics作为例子。</p>
+<p>######让我们先来看下之前是怎么做的。</p>
+<p>上传事件在程序中会被调用很多次，为了数据统计的准确性我们会在每个action里面都汇报到server上去。一般会有两种方法。 </p>
+<ul>
+<li><p>直接调用sdk的方法</p>
+<p>  这种一般都是比较简单的sdk，像Yahoo的Flurry，他的方法只有一行<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- &#20889;&#19968;&#20010;&#31867;&#26041;&#27861;&#65292;&#28982;&#21518;&#35843;&#29992;&#10;&#10;&#9;&#26377;&#20123;&#32479;&#35745;&#30340;sdk&#30340;&#23454;&#29616;&#35201;&#31245;&#24494;&#22810;&#19968;&#20123;&#65292;&#27604;&#22914;google analytics&#12290;&#20182;&#30340;&#20195;&#30721;&#30475;&#36215;&#26469;&#26159;&#36825;&#26679;&#30340;&#10;&#9;&#10;&#9;    Google analytics code&#10;        var tracker = GAI.sharedInstance().defaultTracker&#10;        tracker.set(kGAIScreenName, value: name)&#10;        var builder = GAIDictionaryBuilder.createScreenView()&#10;        tracker.send(builder.build() as [NSObject : AnyObject])&#10;&#10;&#9;&#36825;&#20010;&#20195;&#30721;&#23601;&#26377;&#20123;&#22810;&#65292;&#25110;&#32773;&#25105;&#20204;&#24819;&#21516;&#26102;&#21521;&#20960;&#20010;&#20998;&#26512;&#24179;&#21488;&#21457;&#36865;&#20107;&#20214;&#30340;&#26102;&#20505;&#65292;&#19968;&#33324;&#37117;&#20250;&#20889;&#20010;&#31867;&#26041;&#27861;&#23553;&#35013;&#19968;&#19979;&#12290;&#28982;&#21518;&#29992;&#36825;&#26679;&#30340;&#26041;&#24335;&#22312;&#27599;&#20010;&#38656;&#35201;&#30340;&#22320;&#26041;&#35843;&#29992;&#12290;&#10;&#9;&#10;&#9;```Log.sendEvent(&#34;category&#34;, action: &#34;action&#34;, label: &#34;label&#34;, value: &#34;value&#34;)</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<p>######现在我们可以用更加优雅的方式实现</p>
+<p>Swift 2.0 以后我们可以用另外一种方式来实现上面第二种方法。</p>
+<ul>
+<li><p>定义一个protocol</p>
+<pre><code>protocol MTLog {
+     func logEvent(category: String, action: String, label: String?, value: NSNumber?)
+}
+</code></pre></li>
+<li><p>扩展protocol，实现默认实现</p>
+<pre><code>extension MTLog {
+  func logEvent(category: String, action: String, label: String? = nil, value: NSNumber? = nil ) {
+
+    //Google analytics code
+
+    let tracker = GAI.sharedInstance().defaultTracker
+    let builder = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: Label, value: Value)
+    tracker.send(builder.build() as [NSObject : AnyObject])
+  }
+}
+</code></pre></li>
+<li><p>调用方法</p>
+<p>  现在我们可以用一种优雅的方式来调用了</p>
+<pre><code>logEvent(&quot;category&quot;,action:&quot;action&quot;,label:&quot;label&quot;,value:1)
+</code></pre><p>  如果不需要后面的参数也可以写成</p>
+<pre><code>logEvent(&quot;category&quot;,action:&quot;action&quot;)
+</code></pre><p>  很多时候我们会将同一个view实现的事件作为同一个category来对待。为了避免错误，我们可以在定义protocol的时候定义一个变量作为一个view的默认category。代码可以修改为:</p>
+<pre><code>  protocol MTLog {
+      var category: String {get}
+       func logEvent(action: String, label: String?, value: NSNumber?)
+  }
+  extension MTLog {
+  func logEvent(category: String, action: String, label: String? = nil, value: NSNumber? = nil ) {
+
+    //Google analytics code
+
+    let tracker = GAI.sharedInstance().defaultTracker
+    let builder = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: Label, value: Value)
+    tracker.send(builder.build() as [NSObject : AnyObject])
+  }
+}
+</code></pre><p>  这样我们就不用担心因为typo的问题导致最终的统计结果出现偏差了。</p>
+</li>
+</ul>
+<p>######更为强大来了</p>
+<p>有人会说这样的修改并没有给我们开发带来多大的便利。那么下面这个特性才是protocol的核心了。<br>我们的程序会有很多popup的信息，错误信息，版本提示信息等等等等。这时候我们不得不在每个需要用到的viewcontroller中都实现一遍。想不重复代码？ 可以！ 要么我们写一个UIViewController的基类。要么将viewController作为参数传进函数中。</p>
+<p>现在我们可以这么做：</p>
+<pre><code>extension MTLog where Self: UIViewController {
+  func errorHandle(error: String) {
+
+      let alertController = UIAlertController(title: nil, message: error, preferredStyle: .Alert)
+          let cancelAction = UIAlertAction(title: &quot;OK&quot;, style: .Cancel, handler: nil)
+      alertController.addAction(cancelAction)
+
+      self.presentViewController(alertController, animated: true, completion: nil)
+  }
+}
+</code></pre><p>这样就实现一个简单可复用的提示方法。而且这个方法只在继承与UIViewController的类才有效。这样就不需要实现一个难以控制的基类了。</p>
+<p>这只是基于protocol的一个简单应用。还有其他的我们可以探讨。</p>
+<p>代码我已经上传到<a href="https://github.com/chinamty/MTLogEvent" target="_blank" rel="external">github</a>上了。有需要的小伙伴可以下来看看。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
+    <![CDATA[<h5 id="u5199_u5728_u524D_u9762"><a href="#u5199_u5728_u524D_u9762" class="headerlink" title="写在前面"></a>写在前面</h5><p>苹果在今年WWDC的时候称swift 2.0为面]]>
     </summary>
+    
+      <category term="Swift" scheme="http://www.mcfuns.com/tags/Swift/"/>
+    
+      <category term="iOS" scheme="http://www.mcfuns.com/tags/iOS/"/>
+    
+      <category term="prototol" scheme="http://www.mcfuns.com/tags/prototol/"/>
+    
+      <category term="Swift" scheme="http://www.mcfuns.com/categories/Swift/"/>
     
   </entry>
   
