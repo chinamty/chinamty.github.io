@@ -3,9 +3,9 @@
   <title><![CDATA[Martin's Blog]]></title>
   
   <link href="/atom.xml" rel="self"/>
-  <link href="http://www.mcfuns.com/"/>
+  <link href="http://www.martinsswift.com/"/>
   <updated>2016-01-09T15:30:33.000Z</updated>
-  <id>http://www.mcfuns.com/</id>
+  <id>http://www.martinsswift.com/</id>
   
   <author>
     <name><![CDATA[Martin]]></name>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[基于Protocol的log实现]]></title>
-    <link href="http://www.mcfuns.com/2016/01/04/My-New-Post/"/>
-    <id>http://www.mcfuns.com/2016/01/04/My-New-Post/</id>
+    <link href="http://www.martinsswift.com/2016/01/04/My-New-Post/"/>
+    <id>http://www.martinsswift.com/2016/01/04/My-New-Post/</id>
     <published>2016-01-04T09:29:14.000Z</published>
     <updated>2016-01-09T15:30:33.000Z</updated>
     <content type="html"><![CDATA[<h4 id="u5199_u5728_u524D_u9762"><a href="#u5199_u5728_u524D_u9762" class="headerlink" title="写在前面"></a>写在前面</h4><p>苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。</p>
@@ -105,13 +105,13 @@ tracker.send(builder.build() as [NSObject : AnyObject])
     <![CDATA[<h4 id="u5199_u5728_u524D_u9762"><a href="#u5199_u5728_u524D_u9762" class="headerlink" title="写在前面"></a>写在前面</h4><p>苹果在今年WWDC的时候称swift 2.0为面]]>
     </summary>
     
-      <category term="Swift" scheme="http://www.mcfuns.com/tags/Swift/"/>
+      <category term="Swift" scheme="http://www.martinsswift.com/tags/Swift/"/>
     
-      <category term="iOS" scheme="http://www.mcfuns.com/tags/iOS/"/>
+      <category term="iOS" scheme="http://www.martinsswift.com/tags/iOS/"/>
     
-      <category term="prototol" scheme="http://www.mcfuns.com/tags/prototol/"/>
+      <category term="prototol" scheme="http://www.martinsswift.com/tags/prototol/"/>
     
-      <category term="Swift" scheme="http://www.mcfuns.com/categories/Swift/"/>
+      <category term="Swift" scheme="http://www.martinsswift.com/categories/Swift/"/>
     
   </entry>
   
