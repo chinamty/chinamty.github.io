@@ -5,8 +5,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Martin&#39;s Blog">
-    <title>基于Protocol的log实现 - Martin&#39;s Blog</title>
+    <meta name="generator" content="Martin&#39;s Swift Blog">
+    <title>基于Protocol的log实现 - Martin&#39;s Swift Blog</title>
     <meta name="author" content="Martin">
     
         <meta name="keywords" content="hexo,javascript,">
@@ -15,31 +15,16 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="写在前面苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。
-Session 408: Protocol-Oriented Programming in Swift
-
-什么是协议（protocol）
-
-协议这个概念在Objecti">
+    <meta name="description" content="写在前面苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="基于Protocol的log实现">
 <meta property="og:url" content="http://www.martinsswift.com/2016/01/04/My-New-Post/index.html">
-<meta property="og:site_name" content="Martin's Blog">
-<meta property="og:description" content="写在前面苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。
-Session 408: Protocol-Oriented Programming in Swift
-
-什么是协议（protocol）
-
-协议这个概念在Objecti">
-<meta property="og:updated_time" content="2016-01-09T15:30:33.000Z">
+<meta property="og:site_name" content="Martin's Swift Blog">
+<meta property="og:description" content="写在前面苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。">
+<meta property="og:updated_time" content="2016-01-21T13:15:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Protocol的log实现">
-<meta name="twitter:description" content="写在前面苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。
-Session 408: Protocol-Oriented Programming in Swift
-
-什么是协议（protocol）
-
-协议这个概念在Objecti">
+<meta name="twitter:description" content="写在前面苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。">
     
     
         
@@ -82,7 +67,7 @@ Session 408: Protocol-Oriented Programming in Swift
 <header id="header" data-behavior="3">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
-        <a class="header-title-link" href="/ ">Martin&#39;s Blog</a>
+        <a class="header-title-link" href="/ ">Martin&#39;s Swift Blog</a>
     </h1>
     
         
@@ -241,8 +226,7 @@ Session 408: Protocol-Oriented Programming in Swift
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h4 id="u5199_u5728_u524D_u9762"><a href="#u5199_u5728_u524D_u9762" class="headerlink" title="写在前面"></a>写在前面</h4><p>苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。</p>
-<p><a href="https://developer.apple.com/videos/play/wwdc2015-408/" target="_blank" rel="external">Session 408: Protocol-Oriented Programming in Swift</a></p>
+            <h4 id="u5199_u5728_u524D_u9762"><a href="#u5199_u5728_u524D_u9762" class="headerlink" title="写在前面"></a>写在前面</h4><p>苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。<br><a id="more"></a><br><a href="https://developer.apple.com/videos/play/wwdc2015-408/" target="_blank" rel="external">Session 408: Protocol-Oriented Programming in Swift</a></p>
 <ul>
 <li>什么是协议（protocol）</li>
 </ul>
