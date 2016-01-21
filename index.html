@@ -255,7 +255,7 @@
 let button = UIButton.init(frame: CGRectMake(50, 300, width - 100, 50))
 self.view.addSubview(button)
 </code></pre><p>OC的代码</p>
-<pre><code>   CGFloat width = [[UIScreen mainScreen] bounds].size.width; 
+<pre><code>CGFloat width = [[UIScreen mainScreen] bounds].size.width; 
 UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(50, 300, width - 100, 50)];
 [[self view] addSubview:button];
 </code></pre><p>当一个函数含有多个返回结果的时候，OC只能将返回值包装成一个单一的object比如NSDictionary。Swift可以使用<code>Tuple</code>直接返回</p>
@@ -285,7 +285,6 @@ default:
 <li>更好的协议（protocol）</li>
 </ul>
 <p>swift的优点还有很多，需要我们在使用的时候慢慢发掘。下一章我会介绍下如何在原有的项目中引入Swift。</p>
-<p><a href="https://objectivec2swift.com/#/converter/code" target="_blank" rel="external">https://objectivec2swift.com/#/converter/code</a></p>
 
                     
                         
