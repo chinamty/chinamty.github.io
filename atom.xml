@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.martinsswift.com/"/>
-  <updated>2016-01-21T08:18:37.000Z</updated>
+  <updated>2016-01-21T08:19:49.000Z</updated>
   <id>http://www.martinsswift.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.martinsswift.com/2016/01/19/LearnSwift/"/>
     <id>http://www.martinsswift.com/2016/01/19/LearnSwift/</id>
     <published>2016-01-19T08:49:49.000Z</published>
-    <updated>2016-01-21T08:18:37.000Z</updated>
+    <updated>2016-01-21T08:19:49.000Z</updated>
     <content type="html"><![CDATA[<p><img src="/assets/images/swift.png" alt=""></p>
 <p>最近在和朋友聊天的时候发现还有很多开发者在使用Objective-C，并没有去尝试Swift。原因也无外乎两点。一是项目时间紧，担心没办法在有限的时间内学会，而导致出现不可控制的bug。二是觉得暂时没有必要去考虑新语言，使用OC完全没有问题，也不会耽误项目进度。其实这些担心完全是多余的。</p>
 <h5 id="u4E3A_u4EC0_u4E48_u4F7F_u7528Swift"><a href="#u4E3A_u4EC0_u4E48_u4F7F_u7528Swift" class="headerlink" title="为什么使用Swift"></a>为什么使用Swift</h5><p>Swift 是2013年苹果在WWDC中正式发布的。幸运的是我也参加了那届WWDC。记得当时Craig Federighi在台上介绍Swift的时候，一条条优势与新的特性让台下的小伙伴们频频鼓掌。随着Swift的开源，越来越多的小伙伴们在帮着这门语言向前发展。</p>
