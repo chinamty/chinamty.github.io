@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Martin&#39;s Swift Blog">
-    <title>LearnSwift（一） - Martin&#39;s Swift Blog</title>
+    <title>Learn Swift （二） - Martin&#39;s Swift Blog</title>
     <meta name="author" content="Martin">
     
         <meta name="keywords" content="hexo,javascript,">
@@ -15,16 +15,19 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="最近在和朋友聊天的时候发现还有很多开发者在使用Objective-C，并没有去尝试Swift。原因也无外乎两点。一是项目时间紧，担心没办法在有限的时间内学会，而导致出现不可控制的bug。二是觉得暂时没有必要去考虑新语言，使用OC完全没有问题，也不会耽误项目进度。其实这些担心完全是多余的。">
+    <meta name="description" content="Swift作为一门新的语言，提供了很多优秀的特性，还有大量的语法糖。但是我们之前开发的程序都是用Objective-C写的啊。总不能把原来的都抛弃了，重新写吧……那工作量可就大了。这也是很多朋友还坚持在OC上的一个原因。其实我们不用担心，苹果在发布的时候就为我们想好了解决方案。下面我们就开始进入这个神奇的世界吧。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="LearnSwift（一）">
-<meta property="og:url" content="http://www.martinsswift.com/2016/01/19/LearnSwift/index.html">
+<meta property="og:title" content="Learn Swift （二）">
+<meta property="og:url" content="http://www.martinsswift.com/2016/01/22/Learn-Swift-2/index.html">
 <meta property="og:site_name" content="Martin's Swift Blog">
-<meta property="og:description" content="最近在和朋友聊天的时候发现还有很多开发者在使用Objective-C，并没有去尝试Swift。原因也无外乎两点。一是项目时间紧，担心没办法在有限的时间内学会，而导致出现不可控制的bug。二是觉得暂时没有必要去考虑新语言，使用OC完全没有问题，也不会耽误项目进度。其实这些担心完全是多余的。">
-<meta property="og:updated_time" content="2016-01-21T13:24:27.000Z">
+<meta property="og:description" content="Swift作为一门新的语言，提供了很多优秀的特性，还有大量的语法糖。但是我们之前开发的程序都是用Objective-C写的啊。总不能把原来的都抛弃了，重新写吧……那工作量可就大了。这也是很多朋友还坚持在OC上的一个原因。其实我们不用担心，苹果在发布的时候就为我们想好了解决方案。下面我们就开始进入这个神奇的世界吧。">
+<meta property="og:image" content="http://img2.ph.126.net/GIVwvFwmTmWvxok7uWOXjA==/6598114302762404042.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/H8wwzHLaAlwJkAV77nmcqg==/6631206304168788732.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/wYMsbxEPr7YMSPJHQ985Tg==/6631212901238555799.jpg">
+<meta property="og:updated_time" content="2016-01-29T07:24:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LearnSwift（一）">
-<meta name="twitter:description" content="最近在和朋友聊天的时候发现还有很多开发者在使用Objective-C，并没有去尝试Swift。原因也无外乎两点。一是项目时间紧，担心没办法在有限的时间内学会，而导致出现不可控制的bug。二是觉得暂时没有必要去考虑新语言，使用OC完全没有问题，也不会耽误项目进度。其实这些担心完全是多余的。">
+<meta name="twitter:title" content="Learn Swift （二）">
+<meta name="twitter:description" content="Swift作为一门新的语言，提供了很多优秀的特性，还有大量的语法糖。但是我们之前开发的程序都是用Objective-C写的啊。总不能把原来的都抛弃了，重新写吧……那工作量可就大了。这也是很多朋友还坚持在OC上的一个原因。其实我们不用担心，苹果在发布的时候就为我们想好了解决方案。下面我们就开始进入这个神奇的世界吧。">
     
     
         
@@ -208,13 +211,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            LearnSwift（一）
+            Learn Swift （二）
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Tue Jan 19 2016 16:49:49 GMT+0800">
+    <time itemprop="datePublished" content="Fri Jan 22 2016 11:23:57 GMT+0800">
 	
-		    1月 19, 2016
+		    1月 22, 2016
     	
     </time>
     
@@ -229,48 +232,43 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>最近在和朋友聊天的时候发现还有很多开发者在使用Objective-C，并没有去尝试Swift。原因也无外乎两点。一是项目时间紧，担心没办法在有限的时间内学会，而导致出现不可控制的bug。二是觉得暂时没有必要去考虑新语言，使用OC完全没有问题，也不会耽误项目进度。其实这些担心完全是多余的。<br><a id="more"></a></p>
-<h5 id="u4E3A_u4EC0_u4E48_u4F7F_u7528Swift"><a href="#u4E3A_u4EC0_u4E48_u4F7F_u7528Swift" class="headerlink" title="为什么使用Swift"></a>为什么使用Swift</h5><p>Swift 是2013年苹果在WWDC中正式发布的。幸运的是我也参加了那届WWDC。记得当时Craig Federighi在台上介绍Swift的时候，一条条优势与新的特性让台下的小伙伴们频频鼓掌。随着Swift的开源，越来越多的小伙伴们在帮着这门语言向前发展。</p>
-<p>如果说去年年底开源社区最火热的一件事某过于Swift的开源了。开源当天就有上万个Star。截止目前为止已经有上百个merge request被merge进了版本库。对于那些还在坚持在OC上的小伙伴们来说，现在是转到swift的好时候了。</p>
-<h5 id="swift_u7684_u4F18_u52BF"><a href="#swift_u7684_u4F18_u52BF" class="headerlink" title="swift的优势"></a>swift的优势</h5><h6 id="Fast"><a href="#Fast" class="headerlink" title="Fast"></a>Fast</h6><p>我记得Craig是用Python做的对比。swift号称速度要比Python快3.9倍，OC比python快2.8倍。做rc4运算时比python快220倍。 当然了，发布后经过大家的测试并没有达到他宣传的速度，一门语言发布初期一定是有着很多的问题。他的设计是为了速度，那么以后的优化方向一定是这样的。</p>
-<p>除此之外，swift也能提升我们的开发速度。</p>
-<h6 id="Safety"><a href="#Safety" class="headerlink" title="Safety"></a>Safety</h6><p>另一个宣传的优势就是安全。 Swift在设计之初就考虑了安全问题。 所有的变量在使用之前都必须初始化，内存是编译器自动管理的。不需要我们过多的关注。承接原来的ARC系统，而不是GC(Garbage collect, 垃圾回收)。学习了其他一些语言的特点。变量定义使用<code>var</code>，常量定义使用<code>let</code>。默认所有的变量和常量都是不可以为空的，编译器会在编译的时候检查变量。如果需要使用带空值的变量，Swift定义了一种特殊的方式，optionals 定义的时候添加<code>？</code>或<code>！</code> 关键字即可。</p>
-<h6 id="Modern"><a href="#Modern" class="headerlink" title="Modern"></a>Modern</h6><p>Swift是基于很多其他语言的研究结果后开发的语言。所以他吸收了很多其他语言的优点。撇弃了Objective-c那种蹩脚的语法。</p>
-<p>下面两段代码那个更加容易阅读是显而易见的</p>
-<pre><code>let width = UIScrenn.mainScreen().bounds.width
-let button = UIButton.init(frame: CGRectMake(50, 300, width - 100, 50))
-self.view.addSubview(button)
-</code></pre><p>OC的代码</p>
-<pre><code>CGFloat width = [[UIScreen mainScreen] bounds].size.width; 
-UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(50, 300, width - 100, 50)];
-[[self view] addSubview:button];
-</code></pre><p>当一个函数含有多个返回结果的时候，OC只能将返回值包装成一个单一的object比如NSDictionary。Swift可以使用<code>Tuple</code>直接返回</p>
-<p>比如：</p>
-<pre><code>fun httpGetRequest(url: NSURL) -&gt; (statusCode: Int, status: String)
-let (code, status) = heepGetRequest(url: someurl)
-if code == 200 {
-    //success do something with status
+            <p>Swift作为一门新的语言，提供了很多优秀的特性，还有大量的语法糖。但是我们之前开发的程序都是用Objective-C写的啊。总不能把原来的都抛弃了，重新写吧……那工作量可就大了。这也是很多朋友还坚持在OC上的一个原因。其实我们不用担心，苹果在发布的时候就为我们想好了解决方案。下面我们就开始进入这个神奇的世界吧。</p>
+<a id="more"></a>
+<h4 id="u539F_u6709_u9879_u76EE_u6DFB_u52A0Swift_file"><a href="#u539F_u6709_u9879_u76EE_u6DFB_u52A0Swift_file" class="headerlink" title="原有项目添加Swift file"></a>原有项目添加Swift file</h4><p>我们可以直接在新建里面添加cocoa Class语言选择swift， 或者直接添加swift文件。当我们添加文件后。Xcode会出现这样一个提示:</p>
+<p><img src="http://img2.ph.126.net/GIVwvFwmTmWvxok7uWOXjA==/6598114302762404042.jpg" alt=""><br>确认后，xcode将为我们生成一个以birdge-header.h结尾的文件。</p>
+<h4 id="Bridge_header"><a href="#Bridge_header" class="headerlink" title="Bridge header"></a>Bridge header</h4><p>什么是Bridge-header? 我们可以理解为Swift和OC之间的桥梁。他把swift和objective-c联系到一起。如果我们需要调用objective-c中的文件，我们需要将需要使用的所有class都在这个文件中按照objective-c中的方式import进来。这样就可以在swift的代码中直接使用已经在bridge header中引用的类。</p>
+<h4 id="u624B_u52A8_u6DFB_u52A0Bridge_header"><a href="#u624B_u52A8_u6DFB_u52A0Bridge_header" class="headerlink" title="手动添加Bridge header"></a>手动添加Bridge header</h4><p>如果你不想让xcode帮你生成bridge header。或者因为某些原因没有让系统帮你生产bridge header。可以自己手动添加。</p>
+<p>在xcode选择新建文件，新建一个.h header file。</p>
+<p><img src="http://img0.ph.126.net/H8wwzHLaAlwJkAV77nmcqg==/6631206304168788732.jpg" alt=""></p>
+<p>然后在build settings里面找到 Objective-C Bridging Header这个key，把你刚刚添加的文件名添加到value里面就可以了。</p>
+<p><img src="http://img0.ph.126.net/wYMsbxEPr7YMSPJHQ985Tg==/6631212901238555799.jpg" alt=""></p>
+<h4 id="u8C03_u7528_u4EE3_u7801"><a href="#u8C03_u7528_u4EE3_u7801" class="headerlink" title="调用代码"></a>调用代码</h4><p>现在我们已经成功添加了swift文件在objective-c的工程中，现在就可以使用swift来开发了。那么又该如何使用呢？</p>
+<h5 id="Swift__u4F7F_u7528_u539F_u6709Objective-C_u5BF9_u8C61"><a href="#Swift__u4F7F_u7528_u539F_u6709Objective-C_u5BF9_u8C61" class="headerlink" title="Swift 使用原有Objective-C对象"></a>Swift 使用原有Objective-C对象</h5><p>Swift的语法相对简单，如果要定义变量使用<code>var</code>，定义常量使用<code>let</code>。请看下面的代码：</p>
+<pre><code>import UIKit
+import AVFoundation
+
+class ViewController: UIViewController {
+
+    //定义一个名字为currentIndex的Int型变量，初始值为0
+    var currentIndex: Int = 0
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //定义frame大小
+        let frame = CGRectMake(50, 200, 220, 160)
+        //创建一个view的实例。
+        let view = UIView(frame: frame)
+        //将view添加到self.view中
+        self.view.addSubview(view)
+    }
 }
-</code></pre><p>Swift的Switch更加强大，以前我们去处理字符串的时候只能用N个 if（…） else if (…) 现在我们可以这样</p>
-<pre><code>swift string {
-case &quot;dog&quot;:
-    print(&quot;这是狗&quot;)
-case &quot;cat&quot;:
-    print(&quot;这是猫&quot;)
-case &quot;cow&quot;,&quot;ox&quot;:
-    print(&quot;这是头牛&quot;)
-default:
-    print(&quot;这好像不是我们的动物&quot;)
+</code></pre><p>原来cocoa框架下的api的使用方式和Objective-C的使用大致相同。推荐个网站 <a href="https://objectivec2swift.com/#/converter/code" target="_blank" rel="external">Swift: Objective-C to Swift Converter</a>。这个网站可以将Objective-C的代码转换成swift的代码。</p>
+<p>如果在调用原有objective-C的类的时候提示错误，需要检查下Bridge header的文件中有没有导入想使用的文件。    </p>
+<h5 id="Objective-C_u8C03_u7528Swift_u4EE3_u7801"><a href="#Objective-C_u8C03_u7528Swift_u4EE3_u7801" class="headerlink" title="Objective-C调用Swift代码"></a>Objective-C调用Swift代码</h5><p>我们知道了如何在swift中融合oc的代码，那么怎么在oc中使用swift的代码呢？这里编译器会自动帮我们生成一个虚拟的genarated header，这个文件的名字为你工程项目的名字加上<code>-Swift.h</code>。在使用的时候我们在需要用到的class里面导入这个文件就可以使用含有<code>@objc</code>这个关键字的swift的class了。<code>@objc</code>的作用是告诉编译器，这个swift的class或者protocol是需要在oc的代码里面使用的。这个swift的class看起来如下：</p>
+<pre><code>@objc class someClass {
+    //some code here
 }
-</code></pre><p>看到这有人会说“你忘了写<code>break</code>“。没错，swift里面不需要再写break了。这样就避免了某些时候因为少了break而导致的未知bug。而且case里面可以实现多个条件还可以使用范围条件。 比如1–100可以写成<code>case 1...100:</code>。</p>
-<p>还有一些其他的像：</p>
-<ul>
-<li>结构体里面可以有函数，支持继承协议，支持拓展</li>
-<li>更简洁的closure  </li>
-<li>支持函数语言的写法。如map，filter</li>
-<li>更好的协议（protocol）</li>
-</ul>
-<p>swift的优点还有很多，需要我们在使用的时候慢慢发掘。下一章我会介绍下如何在原有的项目中引入Swift。</p>
+</code></pre><p>如果你的class是继承oc的class，编译器会自动添加<code>@objc</code>。这种情况就不需要我们手动去添加了。</p>
+<p>满足了上面两条我们就可以按照Objective-C的语法调用swift实现的class了。但是对于swift中独有的特性，编译器是会默认为swift的internal方法，是无法在Objective-C中使用的，比如：<code>tuple</code>，柯里化函数等等。</p>
 
             
                 
@@ -283,7 +281,7 @@ default:
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/Swift/">Swift</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/Swift-Obective-C/">Swift, Obective-C</a>
 
             </div>
         
@@ -292,7 +290,7 @@ default:
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/01/22/Learn-Swift-2/"  data-tooltip="Learn Swift （二）">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -300,7 +298,7 @@ default:
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/01/04/My-New-Post/" data-tooltip="基于Protocol的log实现">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/01/19/LearnSwift/" data-tooltip="LearnSwift（一）">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -315,17 +313,17 @@ default:
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.martinsswift.com/2016/01/19/LearnSwift/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.martinsswift.com/2016/01/22/Learn-Swift-2/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.martinsswift.com/2016/01/19/LearnSwift/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.martinsswift.com/2016/01/22/Learn-Swift-2/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.martinsswift.com/2016/01/19/LearnSwift/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.martinsswift.com/2016/01/22/Learn-Swift-2/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -349,8 +347,8 @@ default:
 
         
             
-                <div id="ds-thread" class="ds-thread" data-thread-key="2016/01/19/LearnSwift/"
-     data-title="LearnSwift（一）" data-url="http://www.martinsswift.com/2016/01/19/LearnSwift/">
+                <div id="ds-thread" class="ds-thread" data-thread-key="2016/01/22/Learn-Swift-2/"
+     data-title="Learn Swift （二）" data-url="http://www.martinsswift.com/2016/01/22/Learn-Swift-2/">
 </div>
 
             
@@ -374,7 +372,7 @@ default:
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/01/22/Learn-Swift-2/"  data-tooltip="Learn Swift （二）">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -382,7 +380,7 @@ default:
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/01/04/My-New-Post/" data-tooltip="基于Protocol的log实现">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/01/19/LearnSwift/" data-tooltip="LearnSwift（一）">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -397,17 +395,17 @@ default:
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.martinsswift.com/2016/01/19/LearnSwift/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.martinsswift.com/2016/01/22/Learn-Swift-2/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.martinsswift.com/2016/01/19/LearnSwift/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.martinsswift.com/2016/01/22/Learn-Swift-2/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.martinsswift.com/2016/01/19/LearnSwift/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.martinsswift.com/2016/01/22/Learn-Swift-2/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -433,17 +431,17 @@ default:
                 <div id="share-options-bar" class="share-options-bar" data-behavior="3">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.martinsswift.com/2016/01/19/LearnSwift/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.martinsswift.com/2016/01/22/Learn-Swift-2/">
                 <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.martinsswift.com/2016/01/19/LearnSwift/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.martinsswift.com/2016/01/22/Learn-Swift-2/">
                 <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.martinsswift.com/2016/01/19/LearnSwift/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.martinsswift.com/2016/01/22/Learn-Swift-2/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>

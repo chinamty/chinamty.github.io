@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.martinsswift.com/"/>
-  <updated>2016-01-21T13:24:27.000Z</updated>
+  <updated>2016-01-29T07:24:26.000Z</updated>
   <id>http://www.martinsswift.com/</id>
   
   <author>
@@ -13,6 +13,61 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Learn Swift （二）]]></title>
+    <link href="http://www.martinsswift.com/2016/01/22/Learn-Swift-2/"/>
+    <id>http://www.martinsswift.com/2016/01/22/Learn-Swift-2/</id>
+    <published>2016-01-22T03:23:57.000Z</published>
+    <updated>2016-01-29T07:24:26.000Z</updated>
+    <content type="html"><![CDATA[<p>Swift作为一门新的语言，提供了很多优秀的特性，还有大量的语法糖。但是我们之前开发的程序都是用Objective-C写的啊。总不能把原来的都抛弃了，重新写吧……那工作量可就大了。这也是很多朋友还坚持在OC上的一个原因。其实我们不用担心，苹果在发布的时候就为我们想好了解决方案。下面我们就开始进入这个神奇的世界吧。</p>
+<a id="more"></a>
+<h4 id="u539F_u6709_u9879_u76EE_u6DFB_u52A0Swift_file"><a href="#u539F_u6709_u9879_u76EE_u6DFB_u52A0Swift_file" class="headerlink" title="原有项目添加Swift file"></a>原有项目添加Swift file</h4><p>我们可以直接在新建里面添加cocoa Class语言选择swift， 或者直接添加swift文件。当我们添加文件后。Xcode会出现这样一个提示:</p>
+<p><img src="http://img2.ph.126.net/GIVwvFwmTmWvxok7uWOXjA==/6598114302762404042.jpg" alt=""><br>确认后，xcode将为我们生成一个以birdge-header.h结尾的文件。</p>
+<h4 id="Bridge_header"><a href="#Bridge_header" class="headerlink" title="Bridge header"></a>Bridge header</h4><p>什么是Bridge-header? 我们可以理解为Swift和OC之间的桥梁。他把swift和objective-c联系到一起。如果我们需要调用objective-c中的文件，我们需要将需要使用的所有class都在这个文件中按照objective-c中的方式import进来。这样就可以在swift的代码中直接使用已经在bridge header中引用的类。</p>
+<h4 id="u624B_u52A8_u6DFB_u52A0Bridge_header"><a href="#u624B_u52A8_u6DFB_u52A0Bridge_header" class="headerlink" title="手动添加Bridge header"></a>手动添加Bridge header</h4><p>如果你不想让xcode帮你生成bridge header。或者因为某些原因没有让系统帮你生产bridge header。可以自己手动添加。</p>
+<p>在xcode选择新建文件，新建一个.h header file。</p>
+<p><img src="http://img0.ph.126.net/H8wwzHLaAlwJkAV77nmcqg==/6631206304168788732.jpg" alt=""></p>
+<p>然后在build settings里面找到 Objective-C Bridging Header这个key，把你刚刚添加的文件名添加到value里面就可以了。</p>
+<p><img src="http://img0.ph.126.net/wYMsbxEPr7YMSPJHQ985Tg==/6631212901238555799.jpg" alt=""></p>
+<h4 id="u8C03_u7528_u4EE3_u7801"><a href="#u8C03_u7528_u4EE3_u7801" class="headerlink" title="调用代码"></a>调用代码</h4><p>现在我们已经成功添加了swift文件在objective-c的工程中，现在就可以使用swift来开发了。那么又该如何使用呢？</p>
+<h5 id="Swift__u4F7F_u7528_u539F_u6709Objective-C_u5BF9_u8C61"><a href="#Swift__u4F7F_u7528_u539F_u6709Objective-C_u5BF9_u8C61" class="headerlink" title="Swift 使用原有Objective-C对象"></a>Swift 使用原有Objective-C对象</h5><p>Swift的语法相对简单，如果要定义变量使用<code>var</code>，定义常量使用<code>let</code>。请看下面的代码：</p>
+<pre><code>import UIKit
+import AVFoundation
+
+class ViewController: UIViewController {
+
+    //定义一个名字为currentIndex的Int型变量，初始值为0
+    var currentIndex: Int = 0
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //定义frame大小
+        let frame = CGRectMake(50, 200, 220, 160)
+        //创建一个view的实例。
+        let view = UIView(frame: frame)
+        //将view添加到self.view中
+        self.view.addSubview(view)
+    }
+}
+</code></pre><p>原来cocoa框架下的api的使用方式和Objective-C的使用大致相同。推荐个网站 <a href="https://objectivec2swift.com/#/converter/code" target="_blank" rel="external">Swift: Objective-C to Swift Converter</a>。这个网站可以将Objective-C的代码转换成swift的代码。</p>
+<p>如果在调用原有objective-C的类的时候提示错误，需要检查下Bridge header的文件中有没有导入想使用的文件。    </p>
+<h5 id="Objective-C_u8C03_u7528Swift_u4EE3_u7801"><a href="#Objective-C_u8C03_u7528Swift_u4EE3_u7801" class="headerlink" title="Objective-C调用Swift代码"></a>Objective-C调用Swift代码</h5><p>我们知道了如何在swift中融合oc的代码，那么怎么在oc中使用swift的代码呢？这里编译器会自动帮我们生成一个虚拟的genarated header，这个文件的名字为你工程项目的名字加上<code>-Swift.h</code>。在使用的时候我们在需要用到的class里面导入这个文件就可以使用含有<code>@objc</code>这个关键字的swift的class了。<code>@objc</code>的作用是告诉编译器，这个swift的class或者protocol是需要在oc的代码里面使用的。这个swift的class看起来如下：</p>
+<pre><code>@objc class someClass {
+    //some code here
+}
+</code></pre><p>如果你的class是继承oc的class，编译器会自动添加<code>@objc</code>。这种情况就不需要我们手动去添加了。</p>
+<p>满足了上面两条我们就可以按照Objective-C的语法调用swift实现的class了。但是对于swift中独有的特性，编译器是会默认为swift的internal方法，是无法在Objective-C中使用的，比如：<code>tuple</code>，柯里化函数等等。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Swift作为一门新的语言，提供了很多优秀的特性，还有大量的语法糖。但是我们之前开发的程序都是用Objective-C写的啊。总不能把原来的都抛弃了，重新写吧……那工作量可就大了。这也是很多朋友还坚持在OC上的一个原因。其实我们不用担心，苹果在发布的时候就为我们想好了解决方案。下面我们就开始进入这个神奇的世界吧。</p>]]>
+    
+    </summary>
+    
+      <category term="Swift, Obective-C" scheme="http://www.martinsswift.com/tags/Swift-Obective-C/"/>
+    
+      <category term="Swift" scheme="http://www.martinsswift.com/categories/Swift/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[LearnSwift（一）]]></title>
