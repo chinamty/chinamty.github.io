@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.martinsswift.com/"/>
-  <updated>2016-01-29T07:24:26.000Z</updated>
+  <updated>2016-01-29T07:48:26.000Z</updated>
   <id>http://www.martinsswift.com/</id>
   
   <author>
@@ -19,17 +19,17 @@
     <link href="http://www.martinsswift.com/2016/01/22/Learn-Swift-2/"/>
     <id>http://www.martinsswift.com/2016/01/22/Learn-Swift-2/</id>
     <published>2016-01-22T03:23:57.000Z</published>
-    <updated>2016-01-29T07:24:26.000Z</updated>
+    <updated>2016-01-29T07:48:26.000Z</updated>
     <content type="html"><![CDATA[<p>Swift作为一门新的语言，提供了很多优秀的特性，还有大量的语法糖。但是我们之前开发的程序都是用Objective-C写的啊。总不能把原来的都抛弃了，重新写吧……那工作量可就大了。这也是很多朋友还坚持在OC上的一个原因。其实我们不用担心，苹果在发布的时候就为我们想好了解决方案。下面我们就开始进入这个神奇的世界吧。</p>
 <a id="more"></a>
 <h4 id="u539F_u6709_u9879_u76EE_u6DFB_u52A0Swift_file"><a href="#u539F_u6709_u9879_u76EE_u6DFB_u52A0Swift_file" class="headerlink" title="原有项目添加Swift file"></a>原有项目添加Swift file</h4><p>我们可以直接在新建里面添加cocoa Class语言选择swift， 或者直接添加swift文件。当我们添加文件后。Xcode会出现这样一个提示:</p>
-<p><img src="http://img2.ph.126.net/GIVwvFwmTmWvxok7uWOXjA==/6598114302762404042.jpg" alt=""><br>确认后，xcode将为我们生成一个以birdge-header.h结尾的文件。</p>
+<p><img src="http://martinsswift.com/assets/images/learn1.png" alt=""><br>确认后，xcode将为我们生成一个以birdge-header.h结尾的文件。</p>
 <h4 id="Bridge_header"><a href="#Bridge_header" class="headerlink" title="Bridge header"></a>Bridge header</h4><p>什么是Bridge-header? 我们可以理解为Swift和OC之间的桥梁。他把swift和objective-c联系到一起。如果我们需要调用objective-c中的文件，我们需要将需要使用的所有class都在这个文件中按照objective-c中的方式import进来。这样就可以在swift的代码中直接使用已经在bridge header中引用的类。</p>
 <h4 id="u624B_u52A8_u6DFB_u52A0Bridge_header"><a href="#u624B_u52A8_u6DFB_u52A0Bridge_header" class="headerlink" title="手动添加Bridge header"></a>手动添加Bridge header</h4><p>如果你不想让xcode帮你生成bridge header。或者因为某些原因没有让系统帮你生产bridge header。可以自己手动添加。</p>
 <p>在xcode选择新建文件，新建一个.h header file。</p>
-<p><img src="http://img0.ph.126.net/H8wwzHLaAlwJkAV77nmcqg==/6631206304168788732.jpg" alt=""></p>
+<p><img src="http://martinsswift.com/assets/images/learn2.png" alt=""></p>
 <p>然后在build settings里面找到 Objective-C Bridging Header这个key，把你刚刚添加的文件名添加到value里面就可以了。</p>
-<p><img src="http://img0.ph.126.net/wYMsbxEPr7YMSPJHQ985Tg==/6631212901238555799.jpg" alt=""></p>
+<p><img src="http://martinsswift.com/assets/images/learn3.png" alt=""></p>
 <h4 id="u8C03_u7528_u4EE3_u7801"><a href="#u8C03_u7528_u4EE3_u7801" class="headerlink" title="调用代码"></a>调用代码</h4><p>现在我们已经成功添加了swift文件在objective-c的工程中，现在就可以使用swift来开发了。那么又该如何使用呢？</p>
 <h5 id="Swift__u4F7F_u7528_u539F_u6709Objective-C_u5BF9_u8C61"><a href="#Swift__u4F7F_u7528_u539F_u6709Objective-C_u5BF9_u8C61" class="headerlink" title="Swift 使用原有Objective-C对象"></a>Swift 使用原有Objective-C对象</h5><p>Swift的语法相对简单，如果要定义变量使用<code>var</code>，定义常量使用<code>let</code>。请看下面的代码：</p>
 <pre><code>import UIKit
