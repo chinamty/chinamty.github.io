@@ -9,7 +9,7 @@
     
     <title>
         
-            Hello World |
+            基于Protocol的log实现 |
         
         Martin&#39;s Blog
     </title>
@@ -156,7 +156,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Hello World</span>
+            <span class="title-hover-animation">基于Protocol的log实现</span>
         </div>
 
         
@@ -174,9 +174,20 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-04-01 09:33:36
+        <i class="fas fa-edit"></i>&nbsp;2021-04-01 10:53:02
     </span>
     
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/swift/">swift</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
     
 
     
@@ -191,19 +202,43 @@
         
 
         <div class="article-content markdown-body">
-            <p>Welcome to <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+            <p>写在前面<br>苹果在今年WWDC的时候称swift 2.0为面向协议的语言（Protocol-Oriented Programming）。Dave 用了45分钟的时间生动的阐述了什么是POP, 为什么要这么做。没看过的小伙伴建议去看下。</p>
+<h4 id="什么是协议（protocol）"><a href="#什么是协议（protocol）" class="headerlink" title="什么是协议（protocol）"></a>什么是协议（protocol）</h4><p>协议这个概念在Objective-C中就存在了。所谓协议其实就是一系列可以调用方法的结合。在我们调用的时候就可以将注意力集中在方法本身而不是类的实现。苹果在swift 2.0里面给protocol赋予了更加强大的功能。protocol能够被直接扩展。这样prototol的使用更加灵活方便了。<br>正题来咯<br>基于protocol可以被直接扩展的特性，我们可以很方便的实现一些经常被复用的代码。比如上传事件到一些数据分析平台上去。我这里用google analytics作为例子。<br>让我们先来看下之前是怎么做的。<br>上传事件在程序中会被调用很多次，为了数据统计的准确性我们会在每个action里面都汇报到server上去。一般会有两种方法。<br>直接调用sdk的方法<br>这种一般都是比较简单的sdk，像Yahoo的Flurry，他的方法只有一行Flurry.LogEvent(“message”)对于这类的请求没有必要单独写一个类方法去实现。<br>写一个类方法，然后调用<br>有些统计的sdk的实现要稍微多一些，比如google analytics。他的代码看起来是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Google analytics code</span><br><span class="line">var tracker &#x3D; GAI.sharedInstance().defaultTracker</span><br><span class="line">tracker.set(kGAIScreenName, value: name)</span><br><span class="line">var builder &#x3D; GAIDictionaryBuilder.createScreenView()</span><br><span class="line">tracker.send(builder.build() as [NSObject : AnyObject])</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html" >Writing<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/server.html" >Server<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>这个代码就有些多，或者我们想同时向几个分析平台发送事件的时候，一般都会写个类方法封装一下。然后用这样的方式在每个需要的地方调用。</p>
+<p><code>Log.sendEvent(&quot;category&quot;, action: &quot;action&quot;, label: &quot;label&quot;, value: &quot;value&quot;)</code></p>
+<p>现在我们可以用更加优雅的方式实现<br>Swift 2.0 以后我们可以用另外一种方式来实现上面第二种方法。<br>定义一个protocol</p>
+<figure class="highlight plain"><figcaption><span>MTLog &#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     func logEvent(category: String, action: String, label: String?, value: NSNumber?)</span><br><span class="line">&#125;&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">扩展protocol，实现默认实现</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>extension MTLog {<br>  func logEvent(category: String, action: String, label: String? = nil, value: NSNumber? = nil ) {</p>
+<pre><code>//Google analytics code
 
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html" >Generating<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+let tracker = GAI.sharedInstance().defaultTracker
+let builder = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: Label, value: Value)
+tracker.send(builder.build() as [NSObject : AnyObject])
+</code></pre>
+<p>  }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">调用方法</span><br><span class="line">现在我们可以用一种优雅的方式来调用了</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;logEvent(&quot;category&quot;,action:&quot;action&quot;,label:&quot;label&quot;,value:1)&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">如果不需要后面的参数也可以写成</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;logEvent(&quot;category&quot;,action:&quot;action&quot;)&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">很多时候我们会将同一个view实现的事件作为同一个category来对待。为了避免错误，我们可以在定义protocol的时候定义一个变量作为一个view的默认category。代码可以修改为:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  protocol MTLog {<br>      var category: String {get}<br>       func logEvent(action: String, label: String?, value: NSNumber?)<br>  }<br>  extension MTLog {<br>  func logEvent(category: String, action: String, label: String? = nil, value: NSNumber? = nil ) {</p>
+<pre><code>//Google analytics code
 
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html" >Deployment<i class="fas fa-external-link-alt"></i></a></p>
+let tracker = GAI.sharedInstance().defaultTracker
+let builder = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: Label, value: Value)
+tracker.send(builder.build() as [NSObject : AnyObject])
+</code></pre>
+<p>  }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这样我们就不用担心因为typo的问题导致最终的统计结果出现偏差了。</span><br><span class="line">更为强大来了</span><br><span class="line">有人会说这样的修改并没有给我们开发带来多大的便利。那么下面这个特性才是protocol的核心了。</span><br><span class="line">我们的程序会有很多popup的信息，错误信息，版本提示信息等等等等。这时候我们不得不在每个需要用到的viewcontroller中都实现一遍。想不重复代码？ 可以！ 要么我们写一个UIViewController的基类。要么将viewController作为参数传进函数中。</span><br><span class="line">现在我们可以这么做：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>extension MTLog where Self: UIViewController {<br>  func errorHandle(error: String) {</p>
+<pre><code>  let alertController = UIAlertController(title: nil, message: error, preferredStyle: .Alert)
+      let cancelAction = UIAlertAction(title: &quot;OK&quot;, style: .Cancel, handler: nil)
+  alertController.addAction(cancelAction)
+
+  self.presentViewController(alertController, animated: true, completion: nil)
+</code></pre>
+<p>  }<br>}</p>
+<p>```</p>
+<p>这样就实现一个简单可复用的提示方法。而且这个方法只在继承与UIViewController的类才有效。这样就不需要实现一个难以控制的基类了。<br>这只是基于protocol的一个简单应用。还有其他的我们可以探讨。<br>代码我已经上传到github上了。有需要的小伙伴可以下来看看。</p>
 
         </div>
 
